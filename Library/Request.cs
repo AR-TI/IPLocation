@@ -1,16 +1,12 @@
-﻿using System.Net;
-
-namespace Library
+﻿namespace Library
 {
     public class Request
     {
-        public static string GetData(string? ip)
+        public async Task<string> GetData(string? ip)
         {
-            WebRequest requestGet = WebRequest.Create($"http://ip-api.com/json/{ip}?fields=query,status,message,continent,country,regionName,city");
-            WebResponse response = requestGet.GetResponse();
-            Stream stream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(stream);
-            return reader.ReadToEnd();
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync($"http://ip-api.com/json/{ip}?fields=query,status,message,continent,country,regionName,city");
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }

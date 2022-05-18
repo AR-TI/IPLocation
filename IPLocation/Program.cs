@@ -5,7 +5,8 @@ using System.Text.Json;
 Console.Write("Input IP: ");
 
 string? ip = Console.ReadLine();
-string? result = Request.GetData(ip);
+Request request = new Request();
+string? result = await request.GetData(ip);
 Data? data = JsonSerializer.Deserialize<Data>(result);
 if (data?.Status == "fail")
 {
