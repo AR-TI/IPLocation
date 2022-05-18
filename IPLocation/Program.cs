@@ -1,13 +1,11 @@
 ﻿using IPLocation;
 using Library;
-using System.Text.Json;
 
 Console.Write("Input IP: ");
 
 string? ip = Console.ReadLine();
-Request request = new Request();
-string? result = await request.GetData(ip);
-Data? data = JsonSerializer.Deserialize<Data>(result);
+IpApiClient request = new IpApiClient();
+Data? data = await request.GetData(ip);
 if (data?.Status == "fail")
 {
     Console.WriteLine(data?.Message);

@@ -2,7 +2,7 @@
 
 namespace IPLocation
 {
-    internal class Data
+    public class Data
     {
         [JsonPropertyName("query")]
         public string? IP { get; set; }
